@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.sagar.findout" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="FindOut"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="FindOut"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ResultPercentage"
+            android:label="@string/title_activity_result_percentage"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sagar.findout.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Splash"
+            android:label="FindOut" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="org.achartengine.GraphicalActivity" >
+        </activity>
+        <activity
+            android:name=".trending"
+            android:label="@string/title_activity_trending" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sagar.findout.ResultPercentage" />
+        </activity>
+    </application>
+
+</manifest>
