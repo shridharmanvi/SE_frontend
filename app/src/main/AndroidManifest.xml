@@ -38,7 +38,7 @@
             android:label="@string/title_activity_trending" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sagar.findout.ResultPercentage" />
+                android:value="com.example.sagar.findout.MainActivity" />
         </activity>
     </application>
 

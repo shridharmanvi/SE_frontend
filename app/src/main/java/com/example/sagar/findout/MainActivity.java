@@ -26,29 +26,20 @@ public class MainActivity extends ActionBarActivity {
            public void onClick(View v) {
 
                String Query1 = mSearchQuery.getText().toString();
+               //Checks if the user has entered a value in the EditText
                if (Query1.length() == 0) {
-
-                   Toast.makeText(MainActivity.this, "Enter a Product", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(MainActivity.this, "Enter the candidate", Toast.LENGTH_SHORT).show();
                } else {
-                   Toast.makeText(MainActivity.this, "before" + Query1, Toast.LENGTH_SHORT).show();
-                   if (Query1.contains(" ")) {
-                       Query1= Query1.replace(" ","%20");
-                   }
                    graphResult(Query1);
-
                }
            }
        });
     }
 
                    public void graphResult(String Query1){
-                     //  Toast.makeText(MainActivity.this, "===", Toast.LENGTH_SHORT).show();
                        Intent intent = new Intent(this,ResultPercentage.class);
-                       intent.putExtra(getString(R.string.key_query), Query1);
+                       intent.putExtra(getString(R.string.key_query), Query1);//To pass the query to the Result Percentage activity
                        startActivity(intent);
-
-
-
                    }
 
 

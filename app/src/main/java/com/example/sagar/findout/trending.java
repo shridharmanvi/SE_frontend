@@ -15,110 +15,93 @@ import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Objects;
 
 
 public class trending extends ActionBarActivity {
-
-    private String[] mMonth = new String[] {
-            "Jan", "Feb" , "Mar", "Apr", "May", "Jun",
-            "Jul", "Aug" , "Sep", "Oct", "Nov", "Dec"
-    };
+    private String res;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
              setContentView(R.layout.activity_trending);
-        Toast.makeText(trending.this, "hello!", Toast.LENGTH_LONG).show();
-
-
-
-
-        openChart();
+        res = getIntent().getExtras().getString("result");
+        openChart(res);
     }
 
-    private void openChart(){
+    private void openChart(String res){
+            try{
+                JSONArray arr = new JSONArray(res);
+                JSONObject json = arr.getJSONObject(1);
+                JSONArray keys = json.names();
+                // Creating an  XYSeries for Days
+                XYSeries daysSeries = new XYSeries("Positive Percent");
+                for(int j=0;j<keys.length();j++){
+                    int k =Integer.parseInt(keys.getString(j));
+                    String t = ""+(j+1);
+                    // Adding data to Days Series
+                    daysSeries.add((j+1),json.getDouble(t));
+                }
+                for(int j=0;j<daysSeries.getItemCount();j++){
+                    String t = ""+daysSeries.getY(j);
+                }
+                // Creating a dataset to hold each series
+                XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
+                // Adding dayseries Series to the dataset
+                dataset.addSeries(daysSeries);
 
+                // Creating XYSeriesRenderer to customize incomeSeries
+                XYSeriesRenderer daysRenderer = new XYSeriesRenderer();
+                daysRenderer.setColor(Color.YELLOW);
+                daysRenderer.setPointStyle(PointStyle.CIRCLE);
+                daysRenderer.setFillPoints(true);
+                daysRenderer.setLineWidth(5);
+                daysRenderer.setDisplayChartValues(true);
 
+                //Creating a XYMultipleSeriesRenderer
+                XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
+                multiRenderer.setXLabels(0);
+                multiRenderer.setChartTitle("Positive Sentiment Percent Chart");
+                multiRenderer.setXTitle("Days");
+                multiRenderer.setYTitle("Percentage");
+                multiRenderer.setZoomButtonsVisible(false);
+                multiRenderer.setPanEnabled(false);
+                multiRenderer.setFitLegend(true);
+                multiRenderer.setAxisTitleTextSize(30);
+                multiRenderer.setLegendTextSize(25);
+                multiRenderer.setChartTitleTextSize(45);
+                multiRenderer.setPointSize(10);
+                multiRenderer.setZoomEnabled(false);
+                multiRenderer.setApplyBackgroundColor(true);
+                multiRenderer.setBackgroundColor(Color.BLACK);
+                multiRenderer.setMarginsColor(Color.BLACK);
+                multiRenderer.setFitLegend(true);
+                multiRenderer.setYAxisMin(0);
+                multiRenderer.setYAxisMax(100);
+                multiRenderer.setAxisTitleTextSize(20);
+                multiRenderer.setLabelsTextSize(20);
+                for(int i=0;i<keys.length();i++){
+                    multiRenderer.addXTextLabel(i+1, ""+(i+1));
+                }
 
-            int[] x = { 1,2,3,4,5,6,7,8 };
-            int[] income = { 2000,2500,2700,3000,2800,3500,3700,3800};
-            int[] expense = {2200, 2700, 2900, 2800, 2600, 3000, 3300, 3400 };
+                // Adding incomeRenderer and expenseRenderer to multipleRenderer
+                // Note: The order of adding dataseries to dataset and renderers to multipleRenderer
+                // should be same
+                multiRenderer.addSeriesRenderer(daysRenderer);
 
-            // Creating an  XYSeries for Income
-            XYSeries incomeSeries = new XYSeries("Income");
-            // Creating an  XYSeries for Expense
-            XYSeries expenseSeries = new XYSeries("Expense");
-            // Adding data to Income and Expense Series
-            for(int i=0;i<x.length;i++){
-                incomeSeries.add(x[i], income[i]);
-                expenseSeries.add(x[i],expense[i]);
-            }
-
-            // Creating a dataset to hold each series
-            XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
-            // Adding Income Series to the dataset
-            dataset.addSeries(incomeSeries);
-            // Adding Expense Series to dataset
-            dataset.addSeries(expenseSeries);
-
-            // Creating XYSeriesRenderer to customize incomeSeries
-            XYSeriesRenderer incomeRenderer = new XYSeriesRenderer();
-            incomeRenderer.setColor(Color.YELLOW);
-            incomeRenderer.setPointStyle(PointStyle.CIRCLE);
-            incomeRenderer.setFillPoints(true);
-            incomeRenderer.setLineWidth(5);
-            incomeRenderer.setDisplayChartValues(true);
-
-            // Creating XYSeriesRenderer to customize expenseSeries
-            XYSeriesRenderer expenseRenderer = new XYSeriesRenderer();
-            expenseRenderer.setColor(Color.RED);
-            expenseRenderer.setPointStyle(PointStyle.CIRCLE);
-            expenseRenderer.setFillPoints(true);
-            expenseRenderer.setLineWidth(2);
-            expenseRenderer.setDisplayChartValues(true);
-
-            // Creating a XYMultipleSeriesRenderer to customize the whole chart
-            XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
-            multiRenderer.setXLabels(0);
-            multiRenderer.setChartTitle("Income vs Expense Chart");
-            multiRenderer.setXTitle("Year 2012");
-            multiRenderer.setYTitle("Amount in Dollars");
-            multiRenderer.setZoomButtonsVisible(false);
-            //   multiRenderer.setBackgroundColor(-16777216);
-            multiRenderer.setPanEnabled(false);
-            // multiRenderer.setLegendHeight(35);
-            multiRenderer.setFitLegend(true);
-            // multiRenderer.setChartTitleTextSize(-25);
-            multiRenderer.setAxisTitleTextSize(25);
-            multiRenderer.setLegendTextSize(35);
-            multiRenderer.setChartTitleTextSize(35);
-            multiRenderer.setPointSize(10);
-        multiRenderer.setApplyBackgroundColor(true);
-        multiRenderer.setBackgroundColor(Color.BLACK);
-        multiRenderer.setMarginsColor(Color.BLACK);
-        multiRenderer.setFitLegend(true);
-        for(int i=0;i<x.length;i++){
-                multiRenderer.addXTextLabel(i+1, mMonth[i]);
-            }
-
-            // Adding incomeRenderer and expenseRenderer to multipleRenderer
-            // Note: The order of adding dataseries to dataset and renderers to multipleRenderer
-            // should be same
-            multiRenderer.addSeriesRenderer(incomeRenderer);
-            multiRenderer.addSeriesRenderer(expenseRenderer);
-
-
-            // Creating an intent to plot line chart using dataset and multipleRenderer
-          //  Intent intent = ChartFactory.getLineChartIntent(getBaseContext(), dataset, multiRenderer);
                 View trends = ChartFactory.getLineChartView(this,dataset,multiRenderer);
-        LinearLayout trendsview = (LinearLayout) findViewById(R.id.trendinggraph);
-        trends.setBackgroundColor(2);
-        trendsview.addView(trends);
-            // Start Activity
-            //startActivity(intent);
-
-
-
-        }
+                LinearLayout trendsview = (LinearLayout) findViewById(R.id.trendinggraph);
+                trends.setBackgroundColor(2);
+                trendsview.addView(trends);
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+    }
 
 
     @Override

@@ -13,11 +13,11 @@ public class Splash extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-        int secondsDelayed = 1;
+        //Holds the splash page for 2 seconds
+        int secondsDelayed = 3;
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                startActivity(new Intent(Splash.this, MainActivity.class));
+                startActivity(new Intent(Splash.this, MainActivity.class)); //starts the MainActivity
                 finish();
             }
         }, secondsDelayed * 1000);

@@ -2,9 +2,4 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.sagar.findout.ResultPercentage">
-
-    <item android:id="@+id/trendinggraph" android:title="@string/trending_graph" android:icon="@drawable/ic_launcher"
-        android:orderInCategory="100" app:showAsAction="always" />
-
-
 </menu>

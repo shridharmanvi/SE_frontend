@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -17,79 +18,83 @@ import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class ResultPercentage extends ActionBarActivity {
 
+    private Button trendsViewButton;
     public static final String TAG = ResultPercentage.class.getSimpleName();
-    String input = "";
+    String query1 = "";
+    String res = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_percentage);
-
-
-        Toast.makeText(ResultPercentage.this, "hello!", Toast.LENGTH_LONG).show();
-
-        //final TextView Responseview = (TextView) findViewById(R.id.Response);
-
         Intent intent = getIntent();
-     //   Toast.makeText(getBaseContext(), "hello!", Toast.LENGTH_LONG).show();
         String query = intent.getStringExtra(getString(R.string.key_query));
-        String url_query = "http://shridharmanvi.pythonanywhere.com/" + query;
+        query1 = query;
+        if (query.contains(" ")) {
+            query= query.replace(" ","%20");
+        }
+        query = query.toLowerCase();
+        String url_query = "54.69.180.213/findout/" + query;
         if (query == null) {
             query = "gadget";
         }
         Log.d(TAG, query);
-
         final String finalQuery = query;
-
         new HttpHandler() {
             @Override
             public HttpUriRequest getHttpRequestMethod() {
-
-                return new HttpGet("http://shridharmanvi.pythonanywhere.com/" + finalQuery);
-
-                // return new HttpPost(url)
+                String str = "54.69.180.213/findout/"+finalQuery;
+                return new HttpGet("http://54.69.180.213/findout/"+finalQuery);
             }
 
             @Override
             public void onResponse(String result) {
-                Toast.makeText(getBaseContext(), "Received!", Toast.LENGTH_LONG).show();
-                //Responseview.setText(result);
-                input = result;
-                openChart(input);
-
+                res = result;
+                try {
+                    if(result.equals("Please enter a valid candidate for 2016 Presidential Elections")){
+                        Toast.makeText(ResultPercentage.this,"Invalid Search Query",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(ResultPercentage.this,MainActivity.class);
+                        startActivity(intent);
+                    }
+                    JSONArray arr = new JSONArray(result);
+                    JSONObject json = arr.getJSONObject(0);
+                    double percents[] = new double[2];
+                    percents[0] = json.getDouble("neg");
+                    percents[1] = json.getDouble("pos");
+                    openChart(percents);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
-
         }.execute();
-
-
+        trendsViewButton = (Button) findViewById(R.id.trendsButton);
+        trendsViewButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                trendinggraph(res);
+            }
+        });
     }
-
-    public void openChart(String input) {
-
+    public void openChart(double[] input) {
         // Pie Chart Section Names
-        String[] code = new String[]{
-                input, "Negative", "Neutral"
-        };
-
+        String[] code = new String[]{"positive"+input[1],"negative"+input[0], "neutral"+(100-input[1]-input[0])};
         // Pie Chart Section Value
-        double[] distribution = {44.6, 23.2, 32.2};
-
+        double[] distribution = {input[1], input[0], 100-input[0]-input[1]};
         // Color of each Pie Chart Sections
         int[] colors = {Color.GREEN, Color.RED, Color.CYAN,};
-
         // Instantiating CategorySeries to plot Pie Chart
         CategorySeries distributionSeries = new CategorySeries(" Sentiment Analysis");
-
         for (int i = 0; i < distribution.length; i++) {
             // Adding a slice with its values and name to the Pie Chart
             distributionSeries.add(code[i], distribution[i]);
-
         }
-
         // Instantiating a renderer for the Pie Chart
         DefaultRenderer defaultRenderer = new DefaultRenderer();
         for (int i = 0; i < distribution.length; i++) {
@@ -102,7 +107,7 @@ public class ResultPercentage extends ActionBarActivity {
             defaultRenderer.setPanEnabled(false);
         }
 
-        defaultRenderer.setChartTitle("Sentiment Analysis of  " + input);
+        defaultRenderer.setChartTitle("Sentiment Analysis of  " + query1);
         defaultRenderer.setChartTitleTextSize(60);
         defaultRenderer.setZoomButtonsVisible(false);
         defaultRenderer.setLegendTextSize((float) 30);
@@ -110,35 +115,18 @@ public class ResultPercentage extends ActionBarActivity {
         defaultRenderer.setApplyBackgroundColor(true);
         defaultRenderer.setBackgroundColor(Color.BLACK);
 
-        // Creating an intent to plot bar chart using dataset and multipleRenderer
-        //Intent intent1 = ChartFactory.getPieChartIntent(this, distributionSeries, defaultRenderer, "Sentiment Analysis");
-
-
         View chart = ChartFactory.getPieChartView(this, distributionSeries, defaultRenderer);
 
         LinearLayout chartview = (LinearLayout) findViewById(R.id.chart);
-        //   ImageView   background = (ImageView) findViewById(R.id.chartImageView);
-
-
         chart.setBackgroundColor(2);
-        //ArrayList<View> data = new ArrayList<View>();
-        //data.add(chart);
         chartview.addView(chart, 0);
-
-
-
-        // ChartFactory.getPieChartView(this,distributionSeries,defaultRenderer);
-
-        // startActivity(intent1);
-
-
     }
 
-    public void trendinggraph()
+    public void trendinggraph(String res)
     {
-        startActivity(new Intent(ResultPercentage.this, trending.class));
-
-
+        Intent intent1 = new Intent(ResultPercentage.this, trending.class);
+        intent1.putExtra("result",res);
+        startActivity(intent1);
     }
 
     @Override
@@ -146,18 +134,5 @@ public class ResultPercentage extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_result_percentage, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle presses on the action bar items
-        switch (item.getItemId()) {
-            case R.id.trendinggraph:
-                trendinggraph();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }
