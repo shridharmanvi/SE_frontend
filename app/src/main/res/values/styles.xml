@@ -1,8 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- the theme applied to the application or activity -->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:homeAsUpIndicator">@drawable/home3</item>
 
-    <!-- Base application theme. -->
+        <!-- Support library compatibility -->
+    </style>
 
 
-        <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar" />
+
 
 </resources>

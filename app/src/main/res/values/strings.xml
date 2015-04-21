@@ -13,5 +13,52 @@
     <string name="str_btn_chart">Pie Chart</string>
     <string name="action_search">action_search</string>
     <string name="title_activity_trending">trending</string>
+    <string name="home_button">home_button</string>
+
+
+        <string-array name="candidates">
+
+            <item>Hillary Clinton</item>
+            <item>Mitchel Obama</item>
+            <item>Jim Webb</item>
+            <item>Ted Cruz</item>
+            <item>Rand Paul</item>
+            <item>Marco Rubio</item>
+            <item>Mark Everson</item>
+            <item>Jack Fellure</item>
+            <item>Terry Jones</item>
+            <item>Zoltan Istvan</item>
+            <item>Lincoln Chafee</item>
+            <item>Martin Omalley</item>
+            <item>Joe Biden</item>
+            <item>Bernie Sanders</item>
+            <item>Paul Strauss</item>
+            <item>Dannel Malloy</item>
+            <item>Jack Markell</item>
+            <item>Chris Murphy</item>
+            <item>Ben Carson</item>
+            <item>Mike Huckabee</item>
+            <item>Jeb Bush</item>
+            <item>Chris Christie</item>
+            <item>Carly Fiorina</item>
+            <item>Lindsey Graham</item>
+            <item>Bobby Jindal</item>
+            <item>John Kasich</item>
+            <item>George Pataki</item>
+            <item>Rick Perry</item>
+            <item>Rick Santorum</item>
+            <item>Scott Walker</item>
+            <item>John Bolton</item>
+            <item>Jim Gilmore</item>
+            <item>Peter King</item>
+            <item>Steve Stockman</item>
+            <item>Jill Stein</item>
+            <item>Dennis Lynch</item>
+            <item>Gary Johnson</item>
+            <item>Jesse Ventura</item>
+
+        </string-array>
+    <string name="title_activity_word_cloud">WordCloud</string>
+
 
 </resources>

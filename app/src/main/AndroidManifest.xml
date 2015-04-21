@@ -34,12 +34,23 @@
         <activity android:name="org.achartengine.GraphicalActivity" >
         </activity>
         <activity
-            android:name=".trending"
+            android:name=".Trending"
+
             android:label="@string/title_activity_trending" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sagar.findout.MainActivity" />
         </activity>
+        <activity
+            android:name=".WordCloud"
+            android:label="@string/title_activity_word_cloud"
+             >
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.sagar.findout.MainActivity" />
+
+        </activity>
+
     </application>
 
 </manifest>

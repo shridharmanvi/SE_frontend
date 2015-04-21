@@ -2,13 +2,14 @@ package com.example.sagar.findout;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -19,7 +20,6 @@ import org.achartengine.renderer.SimpleSeriesRenderer;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -29,11 +29,31 @@ public class ResultPercentage extends ActionBarActivity {
     public static final String TAG = ResultPercentage.class.getSimpleName();
     String query1 = "";
     String res = "";
+    AnimationDrawable frameAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_percentage);
+
+        getSupportActionBar().setTitle("Sentiment Analysis");
+
+
+        final ImageView animImageView = (ImageView) findViewById(R.id.ivAnimation);
+        animImageView.setBackgroundResource(R.drawable.anim);
+        animImageView.post(new Runnable() {
+            @Override
+            public void run() {
+                frameAnimation =
+                        (AnimationDrawable) animImageView.getBackground();
+                frameAnimation.start();
+
+
+
+
+            }
+        });
+
         Intent intent = getIntent();
         String query = intent.getStringExtra(getString(R.string.key_query));
         query1 = query;
@@ -79,9 +99,19 @@ public class ResultPercentage extends ActionBarActivity {
         trendsViewButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 trendinggraph(res);
+                frameAnimation.stop();
             }
         });
+
+       Button wordcloud = (Button) findViewById(R.id.wordcloud);
+        wordcloud.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                wordcloud(res);
+            }
+        });
+
     }
+
     public void openChart(double[] input) {
         // Pie Chart Section Names
         String[] code = new String[]{"positive"+input[1],"negative"+input[0], "neutral"+(100-input[1]-input[0])};
@@ -124,11 +154,17 @@ public class ResultPercentage extends ActionBarActivity {
 
     public void trendinggraph(String res)
     {
-        Intent intent1 = new Intent(ResultPercentage.this, trending.class);
+        Intent intent1 = new Intent(ResultPercentage.this, Trending.class);
         intent1.putExtra("result",res);
         startActivity(intent1);
     }
 
+    public void wordcloud(String res)
+    {
+        Intent intent1 = new Intent(ResultPercentage.this,WordCloud.class);
+        intent1.putExtra("result",res);
+        startActivity(intent1);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

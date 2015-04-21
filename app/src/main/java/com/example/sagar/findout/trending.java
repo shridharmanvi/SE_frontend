@@ -23,7 +23,7 @@ import java.util.Iterator;
 import java.util.Objects;
 
 
-public class trending extends ActionBarActivity {
+public class Trending extends ActionBarActivity {
     private String res;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
