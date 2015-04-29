@@ -19,4 +19,10 @@ about what is being talked most about the candidate.
 
 Planing to come up with a web interface soon. Feedback and comments welcome. 
 
+Screen Shots below:
+
 ![](https://s3.amazonaws.com/manvi123/one.jpg)
+![](https://s3.amazonaws.com/manvi123/two.jpg)
+![](https://s3.amazonaws.com/manvi123/three.jpg)
+![](https://s3.amazonaws.com/manvi123/four.jpg)
+
