@@ -19,4 +19,4 @@ about what is being talked most about the candidate.
 
 Planing to come up with a web interface soon. Feedback and comments welcome. 
 
-![](https://github.com/github/training-kit/blob/master/images/professortocat.png)
+![](https://s3.amazonaws.com/manvi123/one.jpg)
