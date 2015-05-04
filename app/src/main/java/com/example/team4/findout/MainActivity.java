@@ -1,4 +1,4 @@
-package com.example.sagar.findout;
+package com.example.team4.findout;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -19,6 +19,7 @@ public class MainActivity extends ActionBarActivity  {
 
     private EditText mSearchQuery;
     private Button mAnalyzeButton;
+    private Button mTrendCompare;
     private Spinner spinner;
     String query1;
 
@@ -30,11 +31,12 @@ public class MainActivity extends ActionBarActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("FindOut");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
 
        // mSearchQuery = (EditText) findViewById(R.id.searchQuery);
         mAnalyzeButton = (Button) findViewById(R.id.analyzeButton);
+        mTrendCompare = (Button) findViewById(R.id.trendcompare);
 
         spinner = (Spinner) findViewById(R.id.spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -75,7 +77,17 @@ public class MainActivity extends ActionBarActivity  {
 
             }
         });
+        mTrendCompare.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(),TrendComparison.class);
+                startActivity(intent);
+
+            }
+        });
     }
+
 
 
 

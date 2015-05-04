@@ -1,4 +1,4 @@
-package com.example.sagar.findout;
+package com.example.team4.findout;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.chart.PointStyle;
@@ -18,10 +17,6 @@ import org.achartengine.renderer.XYSeriesRenderer;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Objects;
-
 
 public class Trending extends ActionBarActivity {
     private String res;
@@ -29,6 +24,8 @@ public class Trending extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
              setContentView(R.layout.activity_trending);
+        getSupportActionBar().setTitle("Popularity Trend");
+
         res = getIntent().getExtras().getString("result");
         openChart(res);
     }
@@ -40,11 +37,13 @@ public class Trending extends ActionBarActivity {
                 JSONArray keys = json.names();
                 // Creating an  XYSeries for Days
                 XYSeries daysSeries = new XYSeries("Positive Percent");
+
                 for(int j=0;j<keys.length();j++){
                     int k =Integer.parseInt(keys.getString(j));
                     String t = ""+(j+1);
                     // Adding data to Days Series
                     daysSeries.add((j+1),json.getDouble(t));
+
                 }
                 for(int j=0;j<daysSeries.getItemCount();j++){
                     String t = ""+daysSeries.getY(j);
@@ -61,6 +60,7 @@ public class Trending extends ActionBarActivity {
                 daysRenderer.setFillPoints(true);
                 daysRenderer.setLineWidth(5);
                 daysRenderer.setDisplayChartValues(true);
+
 
                 //Creating a XYMultipleSeriesRenderer
                 XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
@@ -84,6 +84,9 @@ public class Trending extends ActionBarActivity {
                 multiRenderer.setYAxisMax(100);
                 multiRenderer.setAxisTitleTextSize(20);
                 multiRenderer.setLabelsTextSize(20);
+
+
+
                 for(int i=0;i<keys.length();i++){
                     multiRenderer.addXTextLabel(i+1, ""+(i+1));
                 }

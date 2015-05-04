@@ -1,5 +1,6 @@
-package com.example.sagar.findout;
+package com.example.team4.findout;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -14,12 +15,14 @@ import org.json.JSONObject;
 public class WordCloud extends ActionBarActivity {
     private String res;
     private String url;
+    ProgressDialog dialog=null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_cloud);
+        dialog = ProgressDialog.show(this, "Loading", "Fetching Word Cloud...Please Wait", true);
 
 
 
@@ -43,7 +46,7 @@ public class WordCloud extends ActionBarActivity {
         myWebView.setBackgroundColor(-16777216);
       //  myWebView.getSettings().setBuiltInZoomControls(true);
         myWebView.loadData(wordcloud, "text/html", "UTF-8");
-
+        dialog.dismiss();
 
     }
 

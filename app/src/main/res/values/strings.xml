@@ -58,7 +58,50 @@
             <item>Jesse Ventura</item>
 
         </string-array>
+
+
+    <string-array name="facts">
+
+        <item>John Adams was first to live in White house</item>
+        <item>Thomas Jefferson spoke six different languages</item>
+        <item> Martin Van Buren was the first president born an American Citizen. (All before him were from British colonies)</item>
+        <item>At 6 feet, 4 inches (1.9 meters), Abraham Lincoln was the tallest U.S. President.</item>
+        <item>The White House first website made its debut in October of 1994 under the Clinton administration.</item>
+        <item>The 18th President of the United States, Ulysses S. Grant, was given a $20 speeding ticket for riding his horse and buggy too fast down a Washington, D.C. street.</item>
+        <item>James Garfield, the 20th President, was the first left-handed President.</item>
+        <item>Abraham Lincoln was the tallest president and the first president to be assassinated.</item>
+        <item>Rutherford B. Hayes was the first president to use a phone-his number was 1.</item>
+        <item>James A. Garfield Could write with both hands at the same time - in different languages</item>
+        <item>Herbert Hoover Spoke chinese to his wife to keep their stories private</item>
+        <item>George Washington made the shortest inauguration speech on record—133 words and less than two minutes long.</item>
+        <item>Three presidents died on July 4th: Thomas Jefferson (1826), John Adams (1826), and James Monroe (1831). Calvin Coolidge is the only president to have been born on the Fourth (1872).</item>
+        <item>George Herbert Walker Bush is the only President with four names.</item>
+        <item>No president has ever been an only child.</item>
+        <item>The first president to be born outside the original 13 States was Lincoln.</item>
+        <item>John Adams’ last words were allegedly \"Thomas Jefferson survives.\” The two presidents were friends, but also rivals. Adams didn’t know that Jefferson had died earlier the same day: Independence Day in 1826.</item>
+        <item>Thomas Jefferson believed that soaking your feet in a bucket of cold water would keep you from catching \"catarrhs,\" also known as the common cold.</item>
+        <item>James Monroe has a city in Africa named after him: Monrovia is the capitol of Liberia.</item>
+        <item>Andrew Jackson had a parrot that knew how to swear. One popular story says the parrot started cursing at the president’s funeral.it was so bad that the parrot had to be removed from Jackson’s funeral for swearing too much.</item>
+        <item>William Henry Harrison kept a pet billy goat at the White House.</item>
+        <item>John Tyler had 15 children, more than any other president.</item>
+        <item>Zachary Taylor kept his favorite horse on the White House lawns.</item>
+        <item>Abraham Lincoln was a licensed bartender. He was the part owner of a saloon in Springfield, Illinois, called Berry and Lincoln.</item>
+        <item>Andrew Johnson was trained as a tailor, and made his own suits even after becoming president.</item>
+        <item>Grover Cleveland served as an executioner when he was sheriff in Erie County, New York.</item>
+        <item>Benjamin Harrison was nicknamed \"the human iceberg\" due to his cold disposition. </item>
+        <item>Theodore Roosevelt\'s mother and first wife, Alice, died on the same day: Valentine’s Day in 1884. \"The light has gone out of my life,\" he wrote in his journal.</item>
+        <item>William H. Taft once got stuck in his bathtub and had to call staffers to help pull him out.</item>
+        <item> James Madison weighed under 100 pounds and was only 5\’4\”.</item>
+        <item> John Quincy Adams and Herbert Hoover both had pet alligators.</item>
+           <item>Rutherford B. Hayes signed the act that allowed women to plead cases before the Supreme Court, making it legal for women to practice in the court system.</item>
+        <item>The teddy bear got its name from Teddy Roosevelt. During a hunting trip, a guide tied a bear to a tree for the president to shoot, but he refused, stating that it was unsportsmanlike.</item>
+        <item>Woodrow Wilson is the only president to have earned a Ph.D., and he didn’t learn to read until he was 10 years old.</item>
+        <item>John F. Kennedy was a massive fan of James Bond author Ian Fleming, and upon meeting Fleming at a dinner party in 1960, he asked the author about overthrowing Fidel Castro.</item>
+        <item>During a radio interview, Bill Clinton aced a quiz about My Little Pony.</item>
+    </string-array>
     <string name="title_activity_word_cloud">WordCloud</string>
+    <string name="title_activity_trend_comparison">TrendComparison</string>
+    <string name="title_activity_compare_trend_chart">CompareTrendChart</string>
 
 
 </resources>

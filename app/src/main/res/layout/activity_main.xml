@@ -43,5 +43,18 @@
         android:layout_marginBottom="146dp"
         android:padding="10dp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Trend Comparison"
+        android:id="@+id/trendcompare"
+        android:width="150dp"
+        android:alpha="1"
+        android:background="#1E90FF"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="61dp" />
+
 
 </RelativeLayout>

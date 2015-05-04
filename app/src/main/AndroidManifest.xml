@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sagar.findout" >
+    package="com.example.team4.findout" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,20 +10,20 @@
         android:label="FindOut"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.team4.findout.MainActivity"
             android:label="FindOut"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".ResultPercentage"
+            android:name="com.example.team4.findout.ResultPercentage"
             android:label="@string/title_activity_result_percentage"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName="com.example.team4.findout.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sagar.findout.MainActivity" />
+                android:value="com.example.team4.findout.MainActivity" />
         </activity>
         <activity
-            android:name=".Splash"
+            android:name="com.example.team4.findout.Splash"
             android:label="FindOut" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,23 +34,36 @@
         <activity android:name="org.achartengine.GraphicalActivity" >
         </activity>
         <activity
-            android:name=".Trending"
-
+            android:name="com.example.team4.findout.Trending"
             android:label="@string/title_activity_trending" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sagar.findout.MainActivity" />
+                android:value="com.example.team4.findout.MainActivity" />
         </activity>
         <activity
-            android:name=".WordCloud"
-            android:label="@string/title_activity_word_cloud"
-             >
+            android:name="com.example.team4.findout.WordCloud"
+            android:label="@string/title_activity_word_cloud" >
             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.example.sagar.findout.MainActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.team4.findout.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.team4.findout.TrendComparison"
+            android:label="@string/title_activity_trend_comparison"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.team4.findout.MainActivity" />
 
         </activity>
-
+        <activity
+            android:name="com.example.team4.findout.CompareTrendChart"
+            android:label="@string/title_activity_compare_trend_chart"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.team4.findout.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

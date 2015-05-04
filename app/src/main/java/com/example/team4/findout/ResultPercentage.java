@@ -1,5 +1,6 @@
-package com.example.sagar.findout;
+package com.example.team4.findout;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
@@ -9,7 +10,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -22,6 +22,8 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Random;
+
 
 public class ResultPercentage extends ActionBarActivity {
 
@@ -31,15 +33,19 @@ public class ResultPercentage extends ActionBarActivity {
     String res = "";
     AnimationDrawable frameAnimation;
 
-    @Override
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_percentage);
 
         getSupportActionBar().setTitle("Sentiment Analysis");
+        String[] list = getResources().getStringArray(R.array.facts);
+
+        Random r = new Random();
+      final ProgressDialog dialog = ProgressDialog.show(this, "Did You know", list[r.nextInt(38)], true);
 
 
-        final ImageView animImageView = (ImageView) findViewById(R.id.ivAnimation);
+       /* final ImageView animImageView = (ImageView) findViewById(R.id.ivAnimation);
         animImageView.setBackgroundResource(R.drawable.anim);
         animImageView.post(new Runnable() {
             @Override
@@ -53,7 +59,7 @@ public class ResultPercentage extends ActionBarActivity {
 
             }
         });
-
+*/
         Intent intent = getIntent();
         String query = intent.getStringExtra(getString(R.string.key_query));
         query1 = query;
@@ -79,7 +85,9 @@ public class ResultPercentage extends ActionBarActivity {
                 res = result;
                 try {
                     if(result.equals("Please enter a valid candidate for 2016 Presidential Elections")){
-                        Toast.makeText(ResultPercentage.this,"Invalid Search Query",Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(ResultPercentage.this,"Invalid Search Query",Toast.LENGTH_SHORT).show();
+                         Toast.makeText(ResultPercentage.this, "Not Enough Tweets To Analyze", Toast.LENGTH_SHORT).show();
+
                         Intent intent = new Intent(ResultPercentage.this,MainActivity.class);
                         startActivity(intent);
                     }
@@ -89,6 +97,7 @@ public class ResultPercentage extends ActionBarActivity {
                     percents[0] = json.getDouble("neg");
                     percents[1] = json.getDouble("pos");
                     openChart(percents);
+                    dialog.dismiss();
                 }
                 catch (Exception e){
                     e.printStackTrace();
@@ -99,7 +108,7 @@ public class ResultPercentage extends ActionBarActivity {
         trendsViewButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 trendinggraph(res);
-                frameAnimation.stop();
+               // frameAnimation.stop();
             }
         });
 
@@ -114,11 +123,13 @@ public class ResultPercentage extends ActionBarActivity {
 
     public void openChart(double[] input) {
         // Pie Chart Section Names
-        String[] code = new String[]{"positive"+input[1],"negative"+input[0], "neutral"+(100-input[1]-input[0])};
+         String[] code = new String[]{"Positive:"+input[1],"Negative:"+input[0], "Neutral:"+(100-input[1]-input[0])};
+       // String[] code = new String[]{"positive","negative", "neutral"};
+
         // Pie Chart Section Value
         double[] distribution = {input[1], input[0], 100-input[0]-input[1]};
         // Color of each Pie Chart Sections
-        int[] colors = {Color.GREEN, Color.RED, Color.CYAN,};
+        int[] colors = {Color.parseColor("#38D54D"), Color.parseColor("#DE3333"), Color.parseColor("#2F77C0")};
         // Instantiating CategorySeries to plot Pie Chart
         CategorySeries distributionSeries = new CategorySeries(" Sentiment Analysis");
         for (int i = 0; i < distribution.length; i++) {
@@ -137,8 +148,8 @@ public class ResultPercentage extends ActionBarActivity {
             defaultRenderer.setPanEnabled(false);
         }
 
-        defaultRenderer.setChartTitle("Sentiment Analysis of  " + query1);
-        defaultRenderer.setChartTitleTextSize(60);
+        defaultRenderer.setChartTitle(query1);
+        defaultRenderer.setChartTitleTextSize(40);
         defaultRenderer.setZoomButtonsVisible(false);
         defaultRenderer.setLegendTextSize((float) 30);
         defaultRenderer.setFitLegend(true);
@@ -149,7 +160,10 @@ public class ResultPercentage extends ActionBarActivity {
 
         LinearLayout chartview = (LinearLayout) findViewById(R.id.chart);
         chart.setBackgroundColor(2);
+
         chartview.addView(chart, 0);
+
+
     }
 
     public void trendinggraph(String res)
